@@ -101,27 +101,9 @@ $(document).on("click", "#btnSave", function(event)
 	
 	
 // update
-	/*
-	$(document).on("click", ".btnUpdate", function(event) 
-	{ 
-		 $("#hidBillIDSave").val($(this).data("billid")); 
-		 
-		 $("#accountId").val($(this).closest("tr").find('td:eq(0)').text()); 
-		 $("#joinDate").val($(this).closest("tr").find('td:eq(1)').text()); 
-		 $("#meterReadingBeforeDate").val($(this).closest("tr").find('td:eq(2)').text()); 
-		 $("#meterReadingBefore").val($(this).closest("tr").find('td:eq(3)').text()); 
-		 $("#meterReadingNowDate").val($(this).closest("tr").find('td:eq(4)').text()); 
-		 $("#meterReadingNow").val($(this).closest("tr").find('td:eq(5)').text()); 
-		 $("#noOfUntitsConsumed").val($(this).closest("tr").find('td:eq(6)').text()); 
-		 $("#chargeforelectricityConsume").val($(this).closest("tr").find('td:eq(7)').text());
-		 $("#adjustments").val($(this).closest("tr").find('td:eq(8)').text());
-		 $("#totalAmountDue").val($(this).closest("tr").find('td:eq(9)').text()); 
-		 $("#billDate").val($(this).closest("tr").find('td:eq(10)').text()); 
-		
-	});
-	*/
 	
-	$(document).on("click", ".btnUpdate", function(event) 
+	
+$(document).on("click", ".btnUpdate", function(event) 
 	{ 
 		  
 		 $("#hidBillIDSave").val($(this).closest("tr").find('td:eq(0)').text()); 
@@ -167,38 +149,39 @@ $(document).on("click", ".btnRemove", function(event)
 function onBillDeleteComplete(response, status) 
 { 
 	  if (status == "success") 
-	 { 
-		 var resultSet = JSON.parse(response); 
-		 
-			 if (resultSet.status.trim() == "success") 
-				 { 
-					 $("#alertSuccess").text("Successfully deleted."); 
-					 $("#alertSuccess").show(); 
+		 { 
+			 var resultSet = JSON.parse(response); 
+			 
+				 if (resultSet.status.trim() == "success") 
+					 { 
+						 $("#alertSuccess").text("Successfully deleted."); 
+						 $("#alertSuccess").show(); 
+						 
+						 $("#divItemsGrid").html(resultSet.data); 
+				 } else if (resultSet.status.trim() == "error") 
 					 
-					 $("#divItemsGrid").html(resultSet.data); 
-			 } else if (resultSet.status.trim() == "error") 
+				 { 
+					 $("#alertError").text(resultSet.data); 
+					 $("#alertError").show(); 
+				 } 
 				 
-			 { 
-				 $("#alertError").text(resultSet.data); 
-				 $("#alertError").show(); 
-			 } 
+		} else if (status == "error") 
 			 
-	} else if (status == "error") 
-			 
-	{ 
-	     $("#alertError").text("Error while deleting."); 
-		 $("#alertError").show(); 
-	} else
-			 
-	 { 
-	     $("#alertError").text("Unknown error while deleting.."); 
-		 $("#alertError").show(); 
-	 } 
+		{ 
+		     $("#alertError").text("Error while deleting."); 
+			 $("#alertError").show(); 
+		} else
+				 
+		 { 
+		     $("#alertError").text("Unknown error while deleting.."); 
+			 $("#alertError").show(); 
+		 } 
 		
 		
 	}	
 		
-	// CLIENT-MODEL================================================================
+		
+// CLIENT-MODEL================================================================
 	
 	function validateBillForm()
 	{

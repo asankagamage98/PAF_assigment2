@@ -13,13 +13,13 @@ public class Bill {
                 try
 	        { 
 	            Class.forName("com.mysql.jdbc.Driver"); 
-	    
-	    //Provide the correct details: DBServer/DBName, username, password 
-	    con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/electrogred", "root", "12345"); 
-    } 
-    catch (Exception e) 
-	        {e.printStackTrace();} 
-    return con; 
+			    
+			    //Provide the correct details: DBServer/DBName, username, password 
+			    con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/electrogred", "root", "12345"); 
+		    } 
+		    catch (Exception e) 
+			        {e.printStackTrace();} 
+		    return con; 
     } 
     /**
      * add bill
@@ -269,7 +269,8 @@ public class Bill {
 			   // output = "Deleted successfully"; 
 			    
 			    String newBills = readBill();
-			    output = "{\"status\":\"success full delete\", \"data\": \"" + 
+			    
+			    output = "{\"status\":\"success\", \"data\": \"" + 
 						 newBills + "\"}"; 
 		    } 
 	    catch (Exception e) 
